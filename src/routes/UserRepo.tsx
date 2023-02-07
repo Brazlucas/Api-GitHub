@@ -39,6 +39,7 @@ const UserRepos = () => {
 
   return (
     <>
+      <button>Voltar</button>
       <Title>Explore os repositórios do usuário:</Title>
       <Card>
         <ToastContainer />
