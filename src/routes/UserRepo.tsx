@@ -5,15 +5,18 @@ import Error from "../components/Error/Error";
 import { useParams } from 'react-router-dom';
 import RepoResults from "../components/RepoResults.component/RepoResults";
 import { Repository } from "../types/repos";
-// import { userProps } from "../types/user";
-import { Title, Card } from './Styles.js'
+import { Title, Card } from './Styles.js';
+import Spinner from "../components/Spinner/Spinner.component";
 
 const UserRepos = () => {
+  let [loading, setLoading] = useState(false);
+  const [hide, setHide] = useState(false);
   const [repositories, setRepositories] = useState<Repository[]>([]);
   const [error, setError] = useState(false)
   const { userName } = useParams();
 
   useEffect(() => {
+    setLoading(true);
     setError(false);
     setRepositories([]);
 
@@ -21,11 +24,11 @@ const UserRepos = () => {
       const res = await fetch(`https://api.github.com/users/${userName}/repos`)
       const data = await res.json()
       if (res.status === 404) {
-        toast('Usuário informado não foi encontrado!', { theme: "dark" });
-        setError(true)
+        setLoading(false);
+        toast.error('Houve um erro, tente novamente mais tarde.', { theme: "dark" });
+        setError(true);
         return;
       }
-
       const repoData: Repository[] = data.map((repo: any) => ({
         id: repo.id,
         name: repo.name,
@@ -37,17 +40,30 @@ const UserRepos = () => {
     getRepos();
   }, [userName])
 
+  setTimeout(() => setLoading(false), 300)
+  
+
   return (
     <>
-      <button>Voltar</button>
-      <Title>Explore os repositórios do usuário:</Title>
-      <Card>
-        <ToastContainer />
-        {repositories.map((repo) => (
-          <RepoResults key={repo.id} {...repo} />
-        ))}
-        {error && <Error />}
-      </Card>
+      {loading === true
+        ?
+        <>
+          <div style={{ marginTop: "100px"}}>
+            <Spinner />
+          </div>
+        </>
+        :
+        <>
+          <Title>Explore os repositórios do usuário:</Title>
+          <Card>
+            <ToastContainer />
+            {repositories.map((repo) => (
+              <RepoResults key={repo.id} {...repo} />
+            ))}
+            {error && <Error />}
+          </Card>
+        </>
+      }
     </>
   )
 };
