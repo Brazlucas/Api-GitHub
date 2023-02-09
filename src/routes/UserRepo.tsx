@@ -10,6 +10,7 @@ import Spinner from "../components/Spinner/Spinner.component";
 
 const UserRepos = () => {
   let [loading, setLoading] = useState(false);
+  let [language, setLanguage] = useState(false);
   const [hide, setHide] = useState(false);
   const [repositories, setRepositories] = useState<Repository[]>([]);
   const [error, setError] = useState(false)
@@ -32,6 +33,7 @@ const UserRepos = () => {
       const repoData: Repository[] = data.map((repo: any) => ({
         id: repo.id,
         name: repo.name,
+        language: repo.language
       }));
 
       setRepositories(repoData);
@@ -41,24 +43,24 @@ const UserRepos = () => {
   }, [userName])
 
   setTimeout(() => setLoading(false), 300)
-  
+
 
   return (
     <>
       {loading === true
         ?
         <>
-          <div style={{ marginTop: "100px"}}>
+          <div style={{ marginTop: "100px" }}>
             <Spinner />
           </div>
         </>
         :
         <>
           <Title>Explore os repositórios do usuário:</Title>
+          <ToastContainer />
           <Card>
-            <ToastContainer />
             {repositories.map((repo) => (
-              <RepoResults key={repo.id} {...repo} />
+              <RepoResults key={repo.language} {...repo} />
             ))}
             {error && <Error />}
           </Card>

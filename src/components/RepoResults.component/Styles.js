@@ -14,3 +14,23 @@ export const UserCard = styled.div`
 export const Items = styled.div`
   padding: 1rem;
 `
+
+export const Button = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 100% !important;
+  margin-top: 20px !important;
+  cursor: pointer;
+  width: 140px;
+  height: 40px;
+  background-color: #2b3566;
+  padding: 1rem;
+  border-radius: 5px;
+  opacity: .8;
+  transition: .3s;
+
+  &:hover {
+    opacity: 1;
+  }
+  `
