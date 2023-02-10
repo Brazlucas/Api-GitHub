@@ -5,7 +5,6 @@ export const UserCard = styled.div`
   border-radius: 1rem;
   padding: 2rem;
   width: 90%;
-  height: 240px;
   border-style: solid;
   border-color: #FFF;
   border-width: 1px;
@@ -13,6 +12,27 @@ export const UserCard = styled.div`
 `
 export const Items = styled.div`
   padding: 1rem;
+`
+
+export const CountContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  `
+
+export const Count = styled.div`
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  border: 1px solid #cfcfcf;
+  padding: 8px;
+  width: 80px;
+  height: 40px;
+  background: aqua;
+  background: -moz-linear-gradient(left, aqua 30%, #0E1129 50%);
+  background: -webkit-linear-gradient(left, aqua 30%, #0E1129 50%);
+  background: linear-gradient(to right, aqua 30%, #0E1129 50%);
 `
 
 export const Button = styled.div`

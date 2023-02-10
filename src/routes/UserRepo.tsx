@@ -33,7 +33,9 @@ const UserRepos = () => {
       const repoData: Repository[] = data.map((repo: any) => ({
         id: repo.id,
         name: repo.name,
-        language: repo.language
+        language: repo.language,
+        forks: repo.forks,
+        stargazers_count: repo.stargazers_count
       }));
 
       setRepositories(repoData);
